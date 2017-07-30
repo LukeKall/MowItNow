@@ -1,4 +1,4 @@
-package entites;
+package main.entites;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -13,6 +13,6 @@ import java.util.stream.Collectors;
 public class Reader {
 
     public List<String> readFile(String filename) throws IOException {
-        return Files.lines(Paths.get(filename), StandardCharsets.ISO_8859_1).collect(Collectors.toList());
+        return Files.lines(Paths.get(filename), StandardCharsets.UTF_8).collect(Collectors.toList());
     }
 }

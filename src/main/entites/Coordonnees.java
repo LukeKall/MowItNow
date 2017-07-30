@@ -1,4 +1,4 @@
-package entites;
+package main.entites;
 
 /**
  * Classe de coordonnées
