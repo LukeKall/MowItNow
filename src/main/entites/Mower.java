@@ -11,17 +11,32 @@ public class Mower {
 
     public Mower(Orientation orientation, Lawn lawn, Cell actualCell) throws MowItNowException {
         if(orientation == null || lawn == null || actualCell == null){
-            throw new MowItNowException();
+            throw new MowItNowException("Une tondeuse ne pas être crée sans orientation, pelouse ou cellule de départ.");
         }
         if(actualCell.isTaken()){
-            throw new MowItNowException();
+            throw new MowItNowException("Une tondeuse ne pas être placée sur une cellule déjà prise.");
         }
         this.orientation = orientation;
         this.lawn = lawn;
         this.actualCell = actualCell.lock();
     }
 
-    public void executeInstruction(Instruction instruction){
+    public Orientation getOrientation() {
+        return orientation;
+    }
+
+    public Lawn getLawn() {
+        return lawn;
+    }
+
+    public Cell getActualCell() {
+        return actualCell;
+    }
+
+    public void executeInstruction(Instruction instruction) throws MowItNowException {
+        if(instruction == null){
+            throw new MowItNowException("Impossible d'exécuter une instruction null");
+        }
         switch(instruction){
             case GO:
                 move();

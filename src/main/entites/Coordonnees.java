@@ -41,4 +41,16 @@ public class Coordonnees {
     public void addX(int i){
         this.x += i;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null){
+            return false;
+        }
+        if(!(obj instanceof Coordonnees)){
+            return false;
+        }
+        Coordonnees object = (Coordonnees) obj;
+        return this.x == object.getX() && this.y == object.getY();
+    }
 }

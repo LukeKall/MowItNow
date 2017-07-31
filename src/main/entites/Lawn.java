@@ -13,11 +13,23 @@ public class Lawn {
 
     public Lawn(int xLimit, int yLimit) throws MowItNowException {
         if(xLimit < 0 || yLimit < 0){
-            throw new MowItNowException();
+            throw new MowItNowException("Les limites de la pelouse ne peuvent pas être négatives.");
         }
         this.xLimit = xLimit;
         this.yLimit = yLimit;
         buildGrid();
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    public int getxLimit() {
+        return xLimit;
+    }
+
+    public int getyLimit() {
+        return yLimit;
     }
 
     private void buildGrid(){

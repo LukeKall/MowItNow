@@ -1,5 +1,7 @@
 package main.entites;
 
+import main.MowItNowException;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class Manager {
         return this;
     }
 
-    public void manageMowers(){
+    public void manageMowers() throws MowItNowException {
         for(Map.Entry<Mower, List<Instruction>> mower : instructionsByMower.entrySet()){
             for(Instruction instruction : mower.getValue()){
                 mower.getKey().executeInstruction(instruction);
