@@ -1,9 +1,8 @@
 package main;
 
-import main.MowItNowException;
 import main.entites.Manager;
-import main.entites.Parser;
-import main.entites.Reader;
+import main.util.Parser;
+import main.util.Reader;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,10 +17,8 @@ public class Launcher {
             System.out.println("Le programme attend un argument pour s'exécuter, celui-ci étant le chamin vers le fichier de paramétrage");
         }
         try {
-            Reader reader = new Reader();
-            List<String> listLines = reader.readFile(args[0]);
-            Parser parser = new Parser();
-            Manager manager = parser.parseFile(listLines);
+            List<String> listLines = Reader.readFile(args[0]);
+            Manager manager = Parser.parseFile(listLines);
             manager.manageMowers();
             manager.writePositions();
         } catch (MowItNowException e){

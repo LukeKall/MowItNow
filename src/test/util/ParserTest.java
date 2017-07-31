@@ -1,7 +1,8 @@
-package test.entites;
+package test.util;
 
 import main.MowItNowException;
 import main.entites.*;
+import main.util.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

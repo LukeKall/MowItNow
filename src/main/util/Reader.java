@@ -1,4 +1,4 @@
-package main.entites;
+package main.util;
 
 import main.MowItNowException;
 
@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by archet on 28/07/2017.
+ * Classe de lecture de fichiers
  */
 public class Reader {
 
-    public List<String> readFile(String filename) throws IOException, MowItNowException {
+    public static List<String> readFile(String filename) throws IOException, MowItNowException {
         try {
-            return Files.lines(Paths.get(filename), StandardCharsets.UTF_8).collect(Collectors.toList());
+            return Files.lines(Paths.get(filename)).collect(Collectors.toList());
         } catch (NoSuchFileException e){
             throw new MowItNowException("Fichier " + filename + "introuvable.");
         }

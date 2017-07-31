@@ -1,6 +1,7 @@
-package main.entites;
+package main.util;
 
 import main.MowItNowException;
+import main.entites.*;
 
 import java.util.ArrayList;
 import java.util.List;
