@@ -7,8 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Parser des lignes d'un fichier pour créer les entitées correspondantes
+ */
 public class Parser {
 
+    /**
+     * Parse toutes les lignes d'un fichier
+     * @param lines
+     * @return
+     * @throws MowItNowException
+     */
     public static Manager parseFile(List<String> lines) throws MowItNowException {
         checkFile(lines);
         Manager manager = new Manager();
@@ -19,6 +28,12 @@ public class Parser {
         return manager;
     }
 
+    /**
+     * Parse la partie correspondant à la pelouse
+     * @param line
+     * @return
+     * @throws MowItNowException
+     */
     public static Lawn parseLawn(String line) throws MowItNowException {
         String[] limit = line.split(" ");
         if(limit.length != 2){
@@ -31,6 +46,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parse la partie correspondant à une tondeuse
+     * @param line
+     * @param lawn
+     * @param lineNumber
+     * @return
+     * @throws MowItNowException
+     */
     public static Mower parseMower(String line, Lawn lawn, int lineNumber) throws MowItNowException {
         String[] mowerProperties = line.split(" ");
         if(mowerProperties.length != 3){
@@ -39,21 +62,30 @@ public class Parser {
         if(lawn == null){
             throw new MowItNowException("Erreur lors du parsing du fichier à la ligne " + lineNumber + " (Description d'une tondeuse) : impossible de fournir une pelouse null.");
         }
+        Cell cell =  lawn.getCell(
+                new Coordonnees(
+                        Integer.parseInt(mowerProperties[0]),
+                        Integer.parseInt(mowerProperties[1])
+                )
+        );
+        if(cell == null){
+            throw new MowItNowException("Erreur lors du parsing du fichier à la ligne " + lineNumber + " : ajout d'une tondeuse en dehors de la pelouse");
+        }
         try {
             return new Mower(Orientation.getOrientationByValue(mowerProperties[2]),
                     lawn,
-                    lawn.getCell(
-                            new Coordonnees(
-                                    Integer.parseInt(mowerProperties[0]),
-                                    Integer.parseInt(mowerProperties[1])
-                            )
-                    )
+                   cell
             );
         } catch(MowItNowException|NumberFormatException e){
             throw new MowItNowException("Erreur lors du parsing du fichier à la ligne " + lineNumber + " : " + e);
         }
     }
 
+    /**
+     * Parse la partie correspondant aux instructions
+     * @param line
+     * @return
+     */
     public static List<Instruction> parseInstructions(String line){
         List<Instruction> instructions = new ArrayList<>();
         for(String inst : line.split("")){
@@ -62,6 +94,11 @@ public class Parser {
         return instructions;
     }
 
+    /**
+     * Vérifie la conformité du fichier
+     * @param lines
+     * @throws MowItNowException
+     */
     public static void checkFile(List<String> lines) throws MowItNowException {
         if(lines.size() < 3 ||  lines.size() % 2 == 0){
             throw new MowItNowException("Erreur lors du parsing du fichier, le nombre de lignes ne correspond pas à un fichier valide.");

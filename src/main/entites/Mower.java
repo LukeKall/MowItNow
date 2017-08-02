@@ -3,12 +3,22 @@ package main.entites;
 
 import main.MowItNowException;
 
+/**
+ * Tondeuse
+ */
 public class Mower {
 
     private Orientation orientation;
     private Lawn lawn;
     private Cell actualCell;
 
+    /**
+     * Constructeur
+     * @param orientation
+     * @param lawn
+     * @param actualCell
+     * @throws MowItNowException
+     */
     public Mower(Orientation orientation, Lawn lawn, Cell actualCell) throws MowItNowException {
         if(orientation == null || lawn == null || actualCell == null){
             throw new MowItNowException("Une tondeuse ne pas être crée sans orientation, pelouse ou cellule de départ.");
@@ -33,6 +43,11 @@ public class Mower {
         return actualCell;
     }
 
+    /**
+     * Exécute une instruction
+     * @param instruction
+     * @throws MowItNowException
+     */
     public void executeInstruction(Instruction instruction) throws MowItNowException {
         if(instruction == null){
             throw new MowItNowException("Impossible d'exécuter une instruction null");
@@ -50,12 +65,19 @@ public class Mower {
         }
     }
 
+    /**
+     * Effectue un mouvement
+     */
     public void move(){
         Cell newCell = lawn.getNextFreeCell(actualCell, orientation);
         actualCell.unlock();
         actualCell = newCell.lock();
     }
 
+    /**
+     * Change l'orienration
+     * @param orientation
+     */
     public void setOrientation(Orientation orientation){
         this.orientation = orientation;
     }

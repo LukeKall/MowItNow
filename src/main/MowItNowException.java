@@ -1,5 +1,8 @@
 package main;
 
+/**
+ * Exception générale de MowItNow
+ */
 public class MowItNowException extends Exception {
 
     public MowItNowException() { super(); }

@@ -32,6 +32,9 @@ public class Lawn {
         return yLimit;
     }
 
+    /**
+     * Crée le tableau de cellules
+     */
     private void buildGrid(){
         grid = new Cell[xLimit + 1][yLimit + 1];
         for(int i = 0; i <= xLimit; i++){
@@ -41,6 +44,11 @@ public class Lawn {
         }
     }
 
+    /**
+     * Renvoie la cellule aux coordonnées demandées
+     * @param coordonnees
+     * @return
+     */
     public Cell getCell(Coordonnees coordonnees){
         try {
             return grid[coordonnees.getX()][coordonnees.getY()];
@@ -49,6 +57,12 @@ public class Lawn {
         }
     }
 
+    /**
+     * Renvoie la prochaine cellule libre en fonction de l'orientation
+     * @param cell
+     * @param orientation
+     * @return
+     */
     public Cell getNextFreeCell(Cell cell, Orientation orientation){
         try {
             Cell newCell = grid[cell.getCoordonnees().getX() + orientation.getxDirection()][cell.getCoordonnees().getY() + orientation.getyDirection()];

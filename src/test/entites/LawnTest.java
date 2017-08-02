@@ -4,6 +4,7 @@ import main.MowItNowException;
 import main.entites.Cell;
 import main.entites.Coordonnees;
 import main.entites.Lawn;
+import main.entites.Orientation;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,5 +38,21 @@ public class LawnTest {
 
         coordonnees.setX(10);
         assertNull(lawn.getCell(coordonnees));
+    }
+
+    @Test
+    public void testGetNextFreeCell() throws MowItNowException {
+        Lawn lawn = new Lawn(3, 3);
+        Cell cell = lawn.getCell(new Coordonnees(1, 1));
+        Coordonnees coordonnees = new Coordonnees(1, 2);
+        assertEquals(coordonnees, (cell=lawn.getNextFreeCell(cell, Orientation.NORTH)).getCoordonnees());
+        coordonnees.setX(2);
+        assertEquals(coordonnees, (cell=lawn.getNextFreeCell(cell, Orientation.EAST)).getCoordonnees());
+        coordonnees.setX(1);
+        assertEquals(coordonnees, (cell=lawn.getNextFreeCell(cell, Orientation.WEST)).getCoordonnees());
+        coordonnees.setY(1);
+        assertEquals(coordonnees, (cell=lawn.getNextFreeCell(cell, Orientation.SOUTH)).getCoordonnees());
+        lawn.getCell(new Coordonnees(1, 2)).lock();
+        assertEquals(cell, lawn.getNextFreeCell(cell, Orientation.NORTH));
     }
 }

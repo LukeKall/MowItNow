@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by archet on 28/07/2017.
+ * Launcher
  */
 public class Launcher {
 

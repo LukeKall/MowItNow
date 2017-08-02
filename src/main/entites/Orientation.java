@@ -83,11 +83,24 @@ public enum Orientation {
         return yDirection;
     }
 
+    /**
+     * Retourne une orientation à partir de sa valeur
+     * @param value
+     * @return
+     */
     public static Orientation getOrientationByValue(String value){
         return mapOrientations.get(value);
     }
 
+    /**
+     * Retourne l'orientation à droite
+     * @return
+     */
     public abstract Orientation getRight();
 
+    /**
+     * Retourne l'orientation à gauche
+     * @return
+     */
     public abstract Orientation getLeft();
 }

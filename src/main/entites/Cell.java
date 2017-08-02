@@ -1,6 +1,8 @@
 package main.entites;
 
-
+/**
+ * Cellule d'une pelouse
+ */
 public class Cell {
 
     private Coordonnees coordonnees;
@@ -18,11 +20,19 @@ public class Cell {
         this.isTaken = isTaken;
     }
 
+    /**
+     * Lock une cellule
+     * @return
+     */
     public Cell lock(){
         isTaken = true;
         return this;
     }
 
+    /**
+     * Delock une cellule
+     * @return
+     */
     public Cell unlock(){
         isTaken = false;
         return this;

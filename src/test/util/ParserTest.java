@@ -45,7 +45,7 @@ public class ParserTest {
 
     @Test
     public void parseMower() throws MowItNowException {
-        Lawn lawn = new Lawn(2, 2);
+        Lawn lawn = new Lawn(5, 5);
         assertThrows(MowItNowException.class, () -> {
             Parser.parseMower("1 2 N N", lawn, 2);
         });
@@ -66,6 +66,9 @@ public class ParserTest {
         });
         assertThrows(MowItNowException.class, () -> {
             Parser.parseMower("4 4 N", null, 2);
+        });
+        assertThrows(MowItNowException.class, () -> {
+            Parser.parseMower("8 8 N", lawn, 2);
         });
 
         Mower mower = Parser.parseMower("1 2 N", lawn, 2);
