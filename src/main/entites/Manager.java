@@ -36,7 +36,6 @@ public class Manager {
         for(Map.Entry<Mower, List<Instruction>> mower : instructionsByMower.entrySet()){
             for(Instruction instruction : mower.getValue()){
                 mower.getKey().executeInstruction(instruction);
-//                System.out.println(mower.getKey().toString());
             }
         }
     }
