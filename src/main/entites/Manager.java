@@ -17,6 +17,10 @@ public class Manager {
         this.instructionsByMower = new LinkedHashMap<>();
     }
 
+    public Map<Mower, List<Instruction>> getInstructionsByMower() {
+        return instructionsByMower;
+    }
+
     /**
      * Ajout une tondeuse avec ses instructions
      * @param mower
